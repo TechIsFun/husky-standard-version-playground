@@ -4,12 +4,12 @@
   "description": "Just a playground",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "./gradlew build",
     "prepare": "husky install",
-    "release": "standard-version",
-    "release:minor": "standard-version --release-as minor",
-    "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major"
+    "release": "./gradlew build && standard-version",
+    "release:minor": "./gradlew build && standard-version --release-as minor",
+    "release:patch": "./gradlew build && standard-version --release-as patch",
+    "release:major": "./gradlew build && standard-version --release-as major"
   },
   "repository": {
     "type": "git",
