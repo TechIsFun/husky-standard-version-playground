@@ -1,0 +1,32 @@
+{
+  "name": "husky-standard-version-playground",
+  "version": "1.0.0",
+  "description": "Just a playground",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "prepare": "husky install",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "release:major": "standard-version --release-as major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechIsFun/husky-standard-version-playground.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TechIsFun/husky-standard-version-playground/issues"
+  },
+  "homepage": "https://github.com/TechIsFun/husky-standard-version-playground#readme",
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "standard-version": "^9.3.1"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0"
+  }
+}
