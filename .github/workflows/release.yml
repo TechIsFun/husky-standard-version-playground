@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - develop
-env:
-  NEXT_VERSION: ""
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -12,8 +10,11 @@ jobs:
       - name: Install GitFlow
         run: sudo apt-get install git-flow
         
-      - name: Configure GitFlow
-        run: git config --global gitflow.branch.master main
+      - name: Configure Git
+        run: |
+          git config --global gitflow.branch.master main
+          git config user.name "Github Actions"
+          git config user.email github-actions@github.com
 
       - name: Install bumpversion
         run: pip install bumpversion
@@ -29,6 +30,7 @@ jobs:
       - name: Release
         run: |
           NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,`
+          echo $NEXT_VERSION
           git flow release start $NEXT_VERSION
           bumpversion patch
           npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
