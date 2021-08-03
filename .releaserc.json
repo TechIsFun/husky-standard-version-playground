@@ -1,0 +1,57 @@
+{
+  "branches": [
+    "+([0-9])?(.{+([0-9]),x}).x",
+    "main",
+    "next",
+    "next-major",
+    {
+     "name": "beta",
+     "prerelease": true
+    },
+    {
+     "name": "alpha",
+     "prerelease": true
+    }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/github",
+    [
+      "@google/semantic-release-replace-plugin",
+      {
+        "replacements": [
+          {
+            "files": ["library/build.gradle"],
+            "from": "versionName \".*\"",
+            "to": "versionName \"${nextRelease.version}\"",
+            "results": [
+              {
+                "file": "library/build.gradle",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
+          }
+        ]
+      }
+    ],
+    [
+      "@saithodev/semantic-release-backmerge",
+      {
+        "branchName": "develop",
+        "plugins": [
+          [
+            "@semantic-release/exec",
+            {
+              "successCmd": "echo 'Version in master is ${nextRelease.version}'"
+            }
+          ]
+        ]
+      }
+    ]
+  ]
+}
+

@@ -1,0 +1,40 @@
+name: Build
+on: 
+  push:
+    branches:
+      - develop
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitFlow
+        run: sudo apt-get install git-flow
+        
+      - name: Configure GitFlow
+        run: git config --global gitflow.branch.master main
+
+      - name: Install bumpversion
+        run: pip install bumpversion
+
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      #- name: Init GitFlow with defaults
+      #  run: git flow init -fd
+
+      #- name: Generate Changelog
+      #  run: npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
+
+      - name: Install semantic-release
+        run: npm install --save-dev semantic-release
+
+      - name: Install semantic-release plugin
+        run: npm install --save-dev @google/semantic-release-replace-plugin
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
