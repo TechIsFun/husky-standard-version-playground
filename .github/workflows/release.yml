@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install GitFlow
-        run: apt-get install git-flow
+        run: sudo apt-get install git-flow
 
       - name: Install bumpversion
         run: pip install bumpversion
