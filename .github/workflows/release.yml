@@ -12,9 +12,9 @@ jobs:
         
       - name: Configure Git
         run: |
-          git config --global gitflow.branch.master main && \
-          git config user.name "Github Actions" && \
-          git config user.email github-actions@github.com
+          git config --global gitflow.branch.master main
+          git config --global user.name "Github Actions"
+          git config --global user.email github-actions@github.com
 
       - name: Install bumpversion
         run: pip install bumpversion
