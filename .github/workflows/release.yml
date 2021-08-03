@@ -29,13 +29,14 @@ jobs:
 
       - name: Release
         run: |
-          NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,` && \
-          echo $NEXT_VERSION && \
-          git flow release start $NEXT_VERSION && \
-          bumpversion patch && \
-          npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true && \
-          commit -m "chore: updated changelog" CHANGELOG.md && \
-          git flow release finish $NEXT_VERSION && \
+          git checkout develop
+          NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,`
+          echo $NEXT_VERSION
+          git flow release start $NEXT_VERSION
+          bumpversion patch
+          npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
+          commit -m "chore: updated changelog" CHANGELOG.md
+          git flow release finish $NEXT_VERSION
           git push --all
 
       #- name: Install semantic-release
