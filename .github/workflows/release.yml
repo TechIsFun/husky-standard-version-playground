@@ -11,7 +11,7 @@ jobs:
         run: sudo apt-get install git-flow
         
       - name: Configure GitFlow
-        run: git config --global gitflow.branch.master master
+        run: git config --global gitflow.branch.master main
 
       - name: Install bumpversion
         run: pip install bumpversion
