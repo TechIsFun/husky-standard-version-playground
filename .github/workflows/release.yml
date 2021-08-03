@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Init GitFlow with defaults
-        run: git flow init -d
+        run: git flow init -fd
 
       - name: Generate Changelog
         run: npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
