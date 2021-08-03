@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Install GitFlow
         run: sudo apt-get install git-flow
+        
+      - name: Configure GitFlow
+        run: git config --global gitflow.branch.master master
 
       - name: Install bumpversion
         run: pip install bumpversion
