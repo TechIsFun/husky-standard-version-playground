@@ -27,7 +27,7 @@ jobs:
         run: git flow init -fd
 
       - name: Get next version
-        run: ${{ env.NEXT_VERSION }}=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,` && echo NEXT_VERSION=${{ env.NEXT_VERSION }}
+        run: NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,` && echo NEXT_VERSION=${{ env.NEXT_VERSION }}
 
       - name: Git flow release start
         run: git flow release start ${{ env.NEXT_VERSION }}
