@@ -17,7 +17,7 @@ jobs:
           git config --global user.email github-actions@github.com
 
       - name: Install bumpversion
-        run: pip install bumpversion
+        run: pip install --upgrade bump2version
 
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -33,9 +33,9 @@ jobs:
           NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,`
           echo $NEXT_VERSION
           git flow release start $NEXT_VERSION
-          bumpversion patch
+          bumpversion patch --verbose
           npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
-          commit -m "chore: updated changelog" CHANGELOG.md
+          git commit -m "chore: updated changelog" CHANGELOG.md
           git flow release finish $NEXT_VERSION
           git push --all
 
