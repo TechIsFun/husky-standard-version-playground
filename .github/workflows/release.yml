@@ -26,25 +26,15 @@ jobs:
       - name: Init GitFlow with defaults
         run: git flow init -fd
 
-      - name: Get next version
-        run: NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,` && echo NEXT_VERSION=$NEXT_VERSION
-
-      - name: Git flow release start
-        run: git flow release start $NEXT_VERSION
-
-      - name: Execute bumpversion
-        run: bumpversion --patch
-
-      - name: Update Changelog
+      - name: Release
         run: |
-          npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true \
+          NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,`
+          git flow release start $NEXT_VERSION
+          bumpversion --patch
+          npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
           commit -m "chore: updated changelog" CHANGELOG.md
-
-      - name: Git flow release finish
-        run: git flow release finish $NEXT_VERSION
-
-      - name: Push
-        run: git push --all
+          git flow release finish $NEXT_VERSION
+          git push --all
 
       #- name: Install semantic-release
       #  run: npm install --save-dev semantic-release @google/semantic-release-replace-plugin @saithodev/semantic-release-backmerge
