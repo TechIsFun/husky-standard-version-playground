@@ -1,0 +1,29 @@
+{
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/github",
+    [
+      "@google/semantic-release-replace-plugin",
+      {
+        "replacements": [
+          {
+            "files": ["library/build.gradle"],
+            "from": "versionName \".*\"",
+            "to": "versionName \"${nextRelease.version}\"",
+            "results": [
+              {
+                "file": "library/build.gradle",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
+          }
+        ]
+      }
+    ]
+  ]
+}
+
