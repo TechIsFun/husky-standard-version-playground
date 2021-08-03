@@ -1,0 +1,23 @@
+name: Build
+on: 
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitFlow
+        run: apt-get install git-flow
+
+      - name: Install bumpversion
+        run: pip install bumpversion
+
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Init GitFlow with defaults
+        run: git flow init -d
+
+      - name: Generate Changelog
+        run: npx standard-version --skip.tag=true --skip.bump=true --skip.commit=true
