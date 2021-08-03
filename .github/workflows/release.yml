@@ -27,10 +27,10 @@ jobs:
         run: git flow init -fd
 
       - name: Get next version
-        run: NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,` && echo NEXT_VERSION=${{ env.NEXT_VERSION }}
+        run: NEXT_VERSION=`bumpversion --dry-run --list --allow-dirty patch | grep new_version | sed -r s,"^.*=",,` && echo NEXT_VERSION=$NEXT_VERSION
 
       - name: Git flow release start
-        run: git flow release start ${{ env.NEXT_VERSION }}
+        run: git flow release start $NEXT_VERSION
 
       - name: Execute bumpversion
         run: bumpversion --patch
@@ -41,7 +41,7 @@ jobs:
           commit -m "chore: updated changelog" CHANGELOG.md
 
       - name: Git flow release finish
-        run: git flow release finish ${{ env.NEXT_VERSION }}
+        run: git flow release finish $NEXT_VERSION
 
       - name: Push
         run: git push --all
