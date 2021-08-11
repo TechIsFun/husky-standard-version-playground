@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/TechIsFun/husky-standard-version-playground#readme",
   "devDependencies": {
-    "husky": "^7.0.0",
-    "standard-version": "^9.3.1"
+    "husky": "7.0.1",
+    "standard-version": "9.3.1"
   },
   "dependencies": {
     "@commitlint/cli": "^13.1.0",
