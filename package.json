@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/TechIsFun/husky-standard-version-playground#readme",
   "devDependencies": {
-    "husky": "^7.0.0",
+    "husky": "7.0.4",
     "standard-version": "^9.3.1"
   },
   "dependencies": {
